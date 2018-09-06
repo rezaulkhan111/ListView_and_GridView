@@ -1,5 +1,6 @@
 package inc.machine_code.listview_and_gridview;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private ListViewAdapter listViewAdapter;
     private GridViewAdapter gridViewAdapter;
     private List<Product> productList;
-    private int currentViewMode = 0;
+    private int currentViewMode = 1;
 
     static final int VIEW_MODE_LIST_VIEW = 0;
     static final int VIEW_MODE_GRID_VIEW = 1;
@@ -45,16 +46,25 @@ public class MainActivity extends AppCompatActivity {
         getProductList();
 
 
-        SharedPreferences sharedPreferences = getSharedPreferences("ViewMode", MODE_PRIVATE);
-        currentViewMode = sharedPreferences.getInt("currentViewMode", VIEW_MODE_LIST_VIEW);
+//        SharedPreferences sharedPreferences = getSharedPreferences("ViewMode", MODE_PRIVATE);
+//        currentViewMode = sharedPreferences.getInt("currentViewMode", VIEW_MODE_LIST_VIEW);
+
         listView.setOnItemClickListener(onItemClick);
         gridView.setOnItemClickListener(onItemClick);
 
-        switchView();
+//        switchView();
+        setAdapter();
+
     }
 
     public List<Product> getProductList() {
-        productList=new ArrayList<>();
+        productList = new ArrayList<>();
+        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
+        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
+        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
+        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
+        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
+        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
         productList.add(new Product(R.mipmap.ic_icon, "Photo"));
         productList.add(new Product(R.mipmap.ic_icon, "Photo"));
         productList.add(new Product(R.mipmap.ic_icon, "Photo"));
@@ -64,26 +74,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchView() {
-        if (VIEW_MODE_LIST_VIEW == currentViewMode) {
-            stubList.setVisibility(View.VISIBLE);
-
-            stubGrid.setVisibility(View.GONE);
-        } else {
+        if (VIEW_MODE_GRID_VIEW == currentViewMode) {
             stubList.setVisibility(View.GONE);
 
             stubGrid.setVisibility(View.VISIBLE);
+        } else {
+            stubList.setVisibility(View.VISIBLE);
+
+            stubGrid.setVisibility(View.GONE);
         }
         setAdapter();
     }
 
     private void setAdapter() {
 
-        if (VIEW_MODE_LIST_VIEW == currentViewMode) {
-            listViewAdapter = new ListViewAdapter(this, R.layout.list_item, productList);
-            listView.setAdapter(listViewAdapter);
-        } else {
+        if (VIEW_MODE_GRID_VIEW == currentViewMode) {
             gridViewAdapter = new GridViewAdapter(this, R.layout.grid_item, productList);
             gridView.setAdapter(gridViewAdapter);
+        } else {
+            listViewAdapter = new ListViewAdapter(this, R.layout.list_item, productList);
+            listView.setAdapter(listViewAdapter);
         }
     }
 
@@ -91,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-            Toast.makeText(getApplicationContext(), productList.get(i).getDescription() + "---" + productList.get(i).getDescription(), Toast.LENGTH_LONG).show();
         }
     };
 
