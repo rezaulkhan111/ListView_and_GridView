@@ -2,6 +2,7 @@ package inc.machine_code.listview_and_gridview;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,10 +12,13 @@ import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import inc.machine_code.listview_and_gridview.Defult.DefultActivity;
+import inc.machine_code.listview_and_gridview.Defult_Item.Defult_Class;
 
 public class MainActivity extends AppCompatActivity {
     private ViewStub stubList;
@@ -28,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     static final int VIEW_MODE_LIST_VIEW = 0;
     static final int VIEW_MODE_GRID_VIEW = 1;
+
+
+    List<Defult_Class> defult_classList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,27 +56,21 @@ public class MainActivity extends AppCompatActivity {
 //        SharedPreferences sharedPreferences = getSharedPreferences("ViewMode", MODE_PRIVATE);
 //        currentViewMode = sharedPreferences.getInt("currentViewMode", VIEW_MODE_LIST_VIEW);
 
-        listView.setOnItemClickListener(onItemClick);
-        gridView.setOnItemClickListener(onItemClick);
 
 //        switchView();
+
         setAdapter();
+
 
     }
 
     public List<Product> getProductList() {
         productList = new ArrayList<>();
-        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
-        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
-        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
-        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
-        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
-        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
-        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
-        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
-        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
-        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
-        productList.add(new Product(R.mipmap.ic_icon, "Photo"));
+        productList.add(new Product(R.mipmap.ic_potential_of_hydrogen_foreground, "Potential Of Hydrogen"));
+        productList.add(new Product(R.mipmap.ic_naitrogen_foreground, "Nitrogen"));
+        productList.add(new Product(R.mipmap.ic_posporas_foreground, "Phosphorus"));
+        productList.add(new Product(R.mipmap.ic_potasiam_foreground, "Potassium"));
+        productList.add(new Product(R.mipmap.ic_potasiam_foreground, "Photo"));
         return productList;
     }
 
@@ -91,18 +92,15 @@ public class MainActivity extends AppCompatActivity {
         if (VIEW_MODE_GRID_VIEW == currentViewMode) {
             gridViewAdapter = new GridViewAdapter(this, R.layout.grid_item, productList);
             gridView.setAdapter(gridViewAdapter);
+            gridView.setOnItemClickListener(onItemClick);
+
         } else {
             listViewAdapter = new ListViewAdapter(this, R.layout.list_item, productList);
             listView.setAdapter(listViewAdapter);
+            listView.setOnItemClickListener(onItemClick);
         }
+
     }
-
-    AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-        }
-    };
 
 
     @Override
@@ -131,4 +129,59 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    public List<Defult_Class> Number1List() {
+        defult_classList = new ArrayList<>();
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.mipmap.ic_potasiam_foreground));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.mipmap.ic_potasiam_foreground));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.mipmap.ic_potasiam_foreground));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.mipmap.ic_potasiam_foreground));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.mipmap.ic_potasiam_foreground));
+        return defult_classList;
+    }
+
+    public List<Defult_Class> Number2List() {
+        List<Defult_Class> defult_classList = new ArrayList<>();
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.drawable.header_image));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.drawable.header_image));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.drawable.header_image));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.drawable.header_image));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.drawable.header_image));
+        return defult_classList;
+    }
+
+    public List<Defult_Class> Number3List() {
+        List<Defult_Class> defult_classList = new ArrayList<>();
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.drawable.header_image));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.drawable.header_image));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.drawable.header_image));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.drawable.header_image));
+        defult_classList.add(new Defult_Class("aaaaa", "10>50", "IIIO", R.drawable.header_image));
+        return defult_classList;
+    }
+
+
+    AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+            switch (position) {
+                case 0:
+                    Intent intent = new Intent(MainActivity.this, DefultActivity.class);
+                    intent.putExtra("savedUser", (Serializable) Number1List());
+                    startActivity(intent);
+                    break;
+                case 1:
+//                    intent.putExtra("savedUser", (Serializable) Number2List());
+//                    startActivity(intent);
+                    break;
+                case 2:
+//                    intent.putExtra("savedUser", (Serializable) Number3List());
+//                    startActivity(intent);
+                    break;
+            }
+        }
+    };
+
 }

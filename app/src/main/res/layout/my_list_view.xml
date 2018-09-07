@@ -7,7 +7,10 @@
         android:id="@+id/my_list_view_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="3dp"/>
+        android:layout_margin="3dp"
+        android:horizontalSpacing="2dp"
+        android:paddingTop="2dp"
+        android:verticalSpacing="20dp" />
 
 
 </FrameLayout>
